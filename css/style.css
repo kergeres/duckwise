@@ -1,0 +1,55 @@
+:root {
+    --blue: #4B75FF;
+    --blue-hover: #2E5BEF;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'roboto';
+    width: 100%;
+
+}
+
+*:focus {
+    outline: 0 !important;
+}
+
+::-webkit-scrollbar {
+    width: 7px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--blue);
+}
+
+::-webkit-scrollbar-thumb {
+    background: black;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--blue-hover);
+}
+
+header {
+    height: 120px;
+
+
+}
+
+.upper-nav-container {
+    height: 60%;
+    background-color: #E4E4E4;
+    padding-left: 80px;
+    font-family: 'september';
+    color: #64821C;
+    font-size: 32px;
+    padding-top: 13px;
+}
+
+.lower-nav-container {
+    height: 40%;
+    background-color: #3B3D31;
+    box-shadow: 0px 3px 13px 0px rgba(0, 0, 0, 0.49);
+}
