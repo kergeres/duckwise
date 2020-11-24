@@ -17,25 +17,43 @@ async function loadData() {
 
 loadData();
 
+let szam = 0;
 
 
 function appendCards(cards) {
   let htmlTemplate = "";
   for (let card of cards) {
-      
-    console.log('nagyerunk');
-      htmlTemplate += `
-              
+      if(card.values == null )
+      {
+        card.initials.variant = "";
+      }
+      if (card.main.Batteri.data == null )
+      {
+        card.main.Batteri.data = "";
+        card.main.Batteri.after = "";
+       ;
+      }
+      if (card.main.Rækkevide.data == null )
+      {
+        card.main.Rækkevide.data = "";
+      }
+        if (typeof card.images == "undefined")
+        {
+            card.images = "img/missing-img-sample.jpg";
+        }
+        
+
+      htmlTemplate += `  
       <article>
             <div class="card">
               <div class="card-img-container">
-                  <img src="img/prius-test-img.jpg" class="card-img">
+                  <img src="${card.images}" alt="${card.title} image" class="card-img">
               </div>
               <div class="card-text-container">
                   <div>
                       <h1 class="_title">${card.title}</h1>
-                      <h2 class="brand">Volvo</h2>
-                      <h3 class="variant">Long range plus</h3>
+                      <h2 class="brand">${card.initials.brand}</h2>
+                      <h3 class="variant">${card.initials.variant}</h3>
                   </div>
                   <div class="extras-container">
                       <div class="card-extras-title">
@@ -43,8 +61,8 @@ function appendCards(cards) {
                           <p>WLTP</p>
                       </div>
                       <div class="card-extras-text">
-                          <p>78 kw</p>
-                          <p>456</p>
+                          <p>${card.main.Batteri.data} ${card.main.Batteri.after}</p>
+                          <p>${card.main.Rækkevide.data}</p>
                       </div>
   
   
@@ -54,7 +72,7 @@ function appendCards(cards) {
                   <div class="card-bottom-container"> 
                       <p>More details</p> 
                       
-                      <p><b>69 850 Dkk</b></p>
+                      <p><b>${card.initials.price} Dkk</b></p>
   
                   </div>
   
@@ -63,6 +81,13 @@ function appendCards(cards) {
           </article>
   `;
   }
-  document.querySelector(".iz").innerHTML = htmlTemplate;
+  document.querySelector("#display").innerHTML = htmlTemplate;
+  console.log(szam);
 
 };
+
+function checkForNull(inn)
+{
+if (inn == "null")
+console.log("egynull");
+}
