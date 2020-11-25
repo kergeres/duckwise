@@ -12,18 +12,16 @@ async function loadData() {
   console.log(jsonData);
   _cards = jsonData.data;
   appendCards(_cards);
-
+  
 }
 
 loadData();
-
-let szam = 0;
 
 
 function appendCards(cards) {
   let htmlTemplate = "";
   for (let card of cards) {
-      if(card.values == null )
+      if(card.initials.variant == null )
       {
         card.initials.variant = "";
       }
@@ -38,8 +36,10 @@ function appendCards(cards) {
         card.main.Rækkevide.data = "";
       }
         if (typeof card.images == "undefined")
+
         {
-            card.images = "img/missing-img-sample.jpg";
+        
+            card.images = ["img/missing-img-sample.jpg"];
         }
         
 
@@ -47,7 +47,7 @@ function appendCards(cards) {
       <article>
             <div class="card">
               <div class="card-img-container">
-                  <img src="${card.images}" alt="${card.title} image" class="card-img">
+                  <img src="${card.images[0]}" alt="${card.title} image" class="card-img">
               </div>
               <div class="card-text-container">
                   <div>
@@ -69,8 +69,8 @@ function appendCards(cards) {
                   </div>
                   <hr>  
                   <div class="vl"></div>
-                  <div class="card-bottom-container"> 
-                      <p>More details</p> 
+                  <div onclick="appendCar('${card.ID}')" class="card-bottom-container"> 
+                      <p onclick="appendCar('${card.ID}')">More details</p> 
                       
                       <p><b>${card.initials.price} Dkk</b></p>
   
@@ -82,12 +82,87 @@ function appendCards(cards) {
   `;
   }
   document.querySelector("#display").innerHTML = htmlTemplate;
-  console.log(szam);
+
 
 };
 
-function checkForNull(inn)
+
+function appendCar(car_id)
 {
-if (inn == "null")
-console.log("egynull");
+    let spec_car_display ="";
+    for (const car of _cards) {
+
+        if(car_id==car.ID)
+        {
+            spec_car_display = `
+            <section class="big-card">
+            <h1 class="_title-a">${car.title}</h1>
+            <p onclick="appendCards(_cards)" >&#10005;</p>
+            <h2 class="pris-a">3453495 dkk</h2>
+            <table>
+ 
+                <tr>
+                  <td>variant</td>
+                  <td>Performance</td>
+                  
+                </tr>
+                <tr>
+                  <td>Rækkevide</td>
+                  <td>480 WLTP</td>
+                </tr>
+                <tr>
+                  <td>Batteri</td>
+                  <td>75.0 kwh</td>
+                </tr>
+                 <tr>
+                  <td>Garanti</td>
+                  <td>5 év</td>
+                </tr>
+                 <tr>
+                  <td>0 - 100 Km/t</td>
+                  <td>3.7 | sek</td>
+                </tr>
+                 <tr>
+                  <td>Vægt</td>
+                  <td>75.0 kg</td>
+                </tr>
+                 <tr>
+                  <td>Maksimum hastighed</td>
+                  <td>241 Km / t</td>
+                </tr>
+                 <tr>
+                  <td>Opladning</td>
+                  <td>Type 2 (16kWh)</td>
+                </tr>
+                 <tr>
+                  <td>Opladning (hurtig)</td>
+                  <td>CSS Type 2 (220kWh)</td>
+                </tr>
+                
+              </table>
+              <div <p class="description">Smart EQ fortwo er den sjoveste elbil. Man bliver glad af at kigge p\u00e5\u00a0Smart EQ fortwo og glad for at k\u00f8re i den.</p>
+                </div>
+             <div class="gallery-container">
+             ${displayImages(car.images)}
+             </div>
+        </section>
+        
+            
+            `;
+            
+        }
+        
+    }
+
+    document.querySelector("#display").innerHTML = spec_car_display;
+}
+
+function displayImages(image_arr) {
+    let template = "";
+   console.log(image_arr);
+    for (const image of image_arr) 
+    {
+        template += `<img src="${image}" class="image-a">`;
+    }
+    return template;
 }

@@ -56,14 +56,10 @@ header {
 
 #display {
     width: 95%;
-    background-color: #E4E4E4;
+    background-color: #F2F0F0;
     height: auto;
     margin: 30px auto;
-    border: 0.5px solid rgba(240, 240, 240, 0.8);
-    /* display: flex;
-    flex-wrap: wrap; */
-    /* ;
-    box-shadow: 0px 0px 8px 1px rgba(0, 0, 0, 0.2); */
+    box-shadow: 0px 0px 8px 1px rgba(0, 0, 0, 0.2);
 
 }
 
@@ -81,6 +77,10 @@ header {
     width: 100%;
     height: 50%;
 
+}
+
+.card-bottom-container p {
+    cursor: pointer;
 }
 
 .card-img {
@@ -102,14 +102,18 @@ header {
     height: auto;
 }
 
+._title-a {
+    font-size: 32px;
+    margin: 0;
+    color: #3B3D31
+}
+
 .brand {
     color: #818181;
     font-size: 20px;
     font-weight: 20;
     height: 22px;
     margin: 0;
-
-
 }
 
 .variant {
@@ -182,3 +186,79 @@ hr {
     position: absolute;
     align-items: center;
 }
+
+
+
+
+
+/* --------------------------------- */
+
+
+.big-card {
+
+    height: 700px;
+    padding: 50px;
+}
+
+.big-card p {
+    font-size: 40px;
+    top: 200px;
+    right: 80px;
+    position: absolute;
+    color: var(--greenOne);
+    cursor: pointer;
+}
+
+.big-card p:hover {
+    color: var(--greenThree);
+}
+
+.pris-a {
+    color: var(--greenThree);
+    margin-left: 2px;
+}
+
+table {
+    width: 500px;
+    margin-top: 50px;
+}
+
+table tr td {
+    width: 220px;
+    height: 25px;
+    font-weight: bold;
+}
+
+table tr td:nth-child(2) {
+    padding-left: 120px;
+    font-weight: lighter;
+}
+
+.description {
+    width: 400px;
+    font-size: 18px;
+    margin-top: 50px;
+}
+
+.gallery-container {
+    width: 500px;
+    right: 80px;
+    top: 300px;
+    position: absolute;
+    height: 700px;
+}
+
+.image-a {
+    height: 150px;
+    width: auto;
+    margin: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+/* .image-a:hover {
+    height: 455px;
+    position: absolute;
+    right: 50%;
+    transform: translate(-50%, 50%);
+} */
