@@ -12,6 +12,7 @@ async function loadData() {
   console.log(jsonData);
   _cards = jsonData.data;
   appendCards(_cards);
+  probaa(_cards);
   
 }
 
@@ -20,10 +21,16 @@ loadData();
 
 function appendCards(cards) {
   let htmlTemplate = "";
+  let dkk = "Dkk";
   for (let card of cards) {
       if(card.initials.variant == null )
       {
         card.initials.variant = "";
+      }
+      if (card.initials.price == null || card.initials.price == "0")
+      {
+        card.initials.price = "";
+        dkk = "";
       }
       if (card.main.Batteri.data == null )
       {
@@ -36,12 +43,10 @@ function appendCards(cards) {
         card.main.Rækkevide.data = "";
       }
         if (typeof card.images == "undefined")
-
         {
-        
             card.images = ["img/missing-img-sample.jpg"];
         }
-        
+       
 
       htmlTemplate += `  
       <article>
@@ -58,11 +63,11 @@ function appendCards(cards) {
                   <div class="extras-container">
                       <div class="card-extras-title">
                           <p>Battery</p>
-                          <p>WLTP</p>
+                          <p>Rækkevide</p>
                       </div>
                       <div class="card-extras-text">
                           <p>${card.main.Batteri.data} ${card.main.Batteri.after}</p>
-                          <p>${card.main.Rækkevide.data}</p>
+                          <p>${card.main.Rækkevide.data} ${card.main.Rækkevide.after}</p>
                       </div>
   
   
@@ -72,7 +77,7 @@ function appendCards(cards) {
                   <div onclick="appendCar('${card.ID}')" class="card-bottom-container"> 
                       <p onclick="appendCar('${card.ID}')">More details</p> 
                       
-                      <p><b>${card.initials.price} Dkk</b></p>
+                      <p><b>${card.initials.price} ${dkk}</b></p>
   
                   </div>
   
@@ -90,57 +95,83 @@ function appendCards(cards) {
 function appendCar(car_id)
 {
     let spec_car_display ="";
+    let dkk = "Dkk";
     for (const car of _cards) {
+      if(car.initials.variant == null )
+      {
+        car.initials.variant = "";
+      }
+      if (car.main.Batteri.data == null )
+      {
+        car.main.Batteri.data = "-";
+        car.main.Batteri.after = "";
+       ;
+      }
+      if (car.main.Rækkevide.data == null )
+      {
+        car.main.Rækkevide.data = "-";
+      }
+      if (car.main.Garanti.data == null )
+      {
+        car.main.Garanti.data = "-";
+      }
+      if (car.initials.price == "" || car.initials.price == "-")
+      {
+        car.initials.price = "";
+        dkk = "";
+      }
+
 
         if(car_id==car.ID)
         {
             spec_car_display = `
+            
             <section class="big-card">
             <h1 class="_title-a">${car.title}</h1>
             <p onclick="appendCards(_cards)" >&#10005;</p>
-            <h2 class="pris-a">3453495 dkk</h2>
+            <h2 class="pris-a">${car.initials.price} ${dkk}</h2>
             <table>
  
                 <tr>
                   <td>variant</td>
-                  <td>Performance</td>
+                  <td>${car.initials.variant}</td>
                   
                 </tr>
                 <tr>
                   <td>Rækkevide</td>
-                  <td>480 WLTP</td>
+                  <td>${car.main.Rækkevide.data} ${car.main.Rækkevide.after}</td>
                 </tr>
                 <tr>
                   <td>Batteri</td>
-                  <td>75.0 kwh</td>
+                  <td>${car.main.Batteri.data} ${car.main.Batteri.after}</td>
                 </tr>
                  <tr>
                   <td>Garanti</td>
-                  <td>5 év</td>
+                  <td>${car.main.Garanti.data}</td>
                 </tr>
                  <tr>
                   <td>0 - 100 Km/t</td>
-                  <td>3.7 | sek</td>
+                  <td>${car.main['0 - 100 Km/t'].data} ${car.main['0 - 100 Km/t'].after}</td>
                 </tr>
                  <tr>
                   <td>Vægt</td>
-                  <td>75.0 kg</td>
+                  <td>${car.main.Vægt.data} ${car.main.Vægt.after}</td>
                 </tr>
                  <tr>
                   <td>Maksimum hastighed</td>
-                  <td>241 Km / t</td>
+                  <td>a</td>
                 </tr>
                  <tr>
                   <td>Opladning</td>
-                  <td>Type 2 (16kWh)</td>
+                  <td>${car.extra.Opladning}</td>
                 </tr>
                  <tr>
                   <td>Opladning (hurtig)</td>
-                  <td>CSS Type 2 (220kWh)</td>
+                  <td>lok</td>
                 </tr>
                 
               </table>
-              <div <p class="description">Smart EQ fortwo er den sjoveste elbil. Man bliver glad af at kigge p\u00e5\u00a0Smart EQ fortwo og glad for at k\u00f8re i den.</p>
+              <div <p class="description">${car.description}</p>
                 </div>
              <div class="gallery-container">
              ${displayImages(car.images)}
@@ -162,7 +193,39 @@ function displayImages(image_arr) {
    console.log(image_arr);
     for (const image of image_arr) 
     {
-        template += `<img src="${image}" class="image-a">`;
+        template += ` <a href="${image}"> <img src="${image}" class="image-a"></a>`;
     }
     return template;
+}
+
+function searchCards (value)
+{
+  let filteredCards = [];
+  for (const card of _cards)
+  {
+    let carName = card.title.toLowerCase();
+    let carBrand = card.initials.brand.toLowerCase();
+   
+    if (carName.includes(value.toLowerCase())) 
+    {
+      filteredCards.push(card);
+    }
+    else if (carBrand.includes(value.toLowerCase())) 
+    {
+      filteredCards.push(card);
+    }
+  appendCards(filteredCards);
+ 
+}
+}
+
+
+function probaa (bejon)
+{
+  for (const csa of bejon)
+  {
+    var holll = []
+    holll = csa.main['0 - 100 Km/t'].data;
+  }
+  console.log(holll);
 }

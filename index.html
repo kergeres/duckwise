@@ -11,10 +11,13 @@
 </head>
 <body>
     <header>
-        <div class="upper-nav-container">
-            Eletric cars | denmark
+        <div class="upper-nav-container" onclick="appendCards(_cards)">
+          <span>Eletric cars | denmark</span>
         </div>
-        <div class="lower-nav-container"></div>
+        <div class="lower-nav-container">
+         
+          <input id="search" onkeyup="searchCards(this.value)" placeholder="Search by name or brand">
+        </div>
 
 
     </header>
