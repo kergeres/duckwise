@@ -159,7 +159,7 @@ function appendCar(car_id)
                 </tr>
                  <tr>
                   <td>Maksimum hastighed</td>
-                  <td>a</td>
+                  <td>${car.extra['Maksimum hastighed']}</td>
                 </tr>
                  <tr>
                   <td>Opladning</td>
@@ -167,7 +167,7 @@ function appendCar(car_id)
                 </tr>
                  <tr>
                   <td>Opladning (hurtig)</td>
-                  <td>lok</td>
+                  <td>${car.extra['Opladning (hurtig)']}</td>
                 </tr>
                 
               </table>
