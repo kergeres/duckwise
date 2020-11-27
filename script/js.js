@@ -97,9 +97,9 @@ function appendCar(car_id)
     let spec_car_display ="";
     let dkk = "Dkk";
     for (const car of _cards) {
-      if(car.initials.variant == null )
+      if(car.initials.value == null )
       {
-        car.initials.variant = "";
+        car.initials.value = "";
       }
       if (car.main.Batteri.data == null )
       {
@@ -111,7 +111,11 @@ function appendCar(car_id)
       {
         car.main.Rækkevide.data = "-";
       }
+     
       if (car.main.Garanti.data == null )
+      {
+        car.main.Garanti.data = "-";
+      }if (car.main.Garanti.data == null )
       {
         car.main.Garanti.data = "-";
       }
@@ -119,6 +123,23 @@ function appendCar(car_id)
       {
         car.initials.price = "";
         dkk = "";
+      }
+      if ( typeof car.extra.Opladning == "undefined")
+      {
+        car.extra.Opladning = "-";
+      }
+      if ( typeof car.extra['Opladning (hurtig)'] == "undefined")
+      {
+        car.extra['Opladning (hurtig)'] = "-";
+      } 
+      if ( typeof car.extra['Maksimum hastighed'] == "undefined")
+      {
+        car.extra['Maksimum hastighed'] = "-";
+      }
+      if (car.main.Vægt.data == null)
+      {
+        car.main.Vægt.data = "-";
+        car.main.Vægt.after = "";
       }
 
 
