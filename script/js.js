@@ -111,11 +111,11 @@ function appendCar(car_id)
       {
         car.main.Rækkevide.data = "-";
       }
+     
       if (car.main.Garanti.data == null )
       {
         car.main.Garanti.data = "-";
-      }
-      if (car.main.Garanti.data == null )
+      }if (car.main.Garanti.data == null )
       {
         car.main.Garanti.data = "-";
       }
@@ -123,6 +123,23 @@ function appendCar(car_id)
       {
         car.initials.price = "";
         dkk = "";
+      }
+      if ( typeof car.extra.Opladning == "undefined")
+      {
+        car.extra.Opladning = "-";
+      }
+      if ( typeof car.extra['Opladning (hurtig)'] == "undefined")
+      {
+        car.extra['Opladning (hurtig)'] = "-";
+      } 
+      if ( typeof car.extra['Maksimum hastighed'] == "undefined")
+      {
+        car.extra['Maksimum hastighed'] = "-";
+      }
+      if (car.main.Vægt.data == null)
+      {
+        car.main.Vægt.data = "-";
+        car.main.Vægt.after = "";
       }
 
 
