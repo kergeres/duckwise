@@ -97,9 +97,9 @@ function appendCar(car_id)
     let spec_car_display ="";
     let dkk = "Dkk";
     for (const car of _cards) {
-      if(car.initials.variant == null )
+      if(car.initials.value == null )
       {
-        car.initials.variant = "";
+        car.initials.value = "";
       }
       if (car.main.Batteri.data == null )
       {
@@ -110,6 +110,10 @@ function appendCar(car_id)
       if (car.main.Rækkevide.data == null )
       {
         car.main.Rækkevide.data = "-";
+      }
+      if (car.main.Garanti.data == null )
+      {
+        car.main.Garanti.data = "-";
       }
       if (car.main.Garanti.data == null )
       {
